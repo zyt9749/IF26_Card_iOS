@@ -10,6 +10,7 @@
 		68CFDE4121C111370038AC1F /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CFDE3321C110E90038AC1F /* SQLite.framework */; };
 		68CFDE4221C1115E0038AC1F /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CFDE3321C110E90038AC1F /* SQLite.framework */; };
 		68CFDE4321C1115E0038AC1F /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 68CFDE3321C110E90038AC1F /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		68CFDE4821C117E40038AC1F /* ScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CFDE4721C117E40038AC1F /* ScanController.swift */; };
 		78F4BC8421BD67E7008C157D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F4BC8321BD67E7008C157D /* AppDelegate.swift */; };
 		78F4BC8621BD67E7008C157D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F4BC8521BD67E7008C157D /* ViewController.swift */; };
 		78F4BC8921BD67E7008C157D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78F4BC8721BD67E7008C157D /* Main.storyboard */; };
@@ -92,6 +93,7 @@
 
 /* Begin PBXFileReference section */
 		68CFDE2821C110E80038AC1F /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
+		68CFDE4721C117E40038AC1F /* ScanController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanController.swift; sourceTree = "<group>"; };
 		78F4BC8021BD67E7008C157D /* IF26_Card_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IF26_Card_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78F4BC8321BD67E7008C157D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78F4BC8521BD67E7008C157D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				78F4BC8A21BD67E9008C157D /* Assets.xcassets */,
 				78F4BC8C21BD67E9008C157D /* LaunchScreen.storyboard */,
 				78F4BC8F21BD67E9008C157D /* Info.plist */,
+				68CFDE4721C117E40038AC1F /* ScanController.swift */,
 			);
 			path = IF26_Card_iOS;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78F4BC8621BD67E7008C157D /* ViewController.swift in Sources */,
+				68CFDE4821C117E40038AC1F /* ScanController.swift in Sources */,
 				78F4BC8421BD67E7008C157D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
