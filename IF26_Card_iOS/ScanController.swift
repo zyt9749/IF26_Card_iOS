@@ -12,6 +12,7 @@ import AVFoundation
 class ScanController: UIViewController,AVCaptureMetadataOutputObjectsDelegate{
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    var typename:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
