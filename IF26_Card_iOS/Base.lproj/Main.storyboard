@@ -152,7 +152,7 @@
                                             </state>
                                             <connections>
                                                 <action selector="addCardType:" destination="Ocy-vO-sTD" eventType="touchUpInside" id="Czj-G8-a7p"/>
-                                                <segue destination="NIN-XJ-dQk" kind="show" id="UZh-V7-p7q"/>
+                                                <segue destination="EBz-LY-vRe" kind="show" id="Aut-cN-sc2"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -171,21 +171,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PEh-N6-RCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2383" y="0.0"/>
-        </scene>
-        <!--Scan Controller-->
-        <scene sceneID="q19-wz-Sjk">
-            <objects>
-                <viewController id="NIN-XJ-dQk" customClass="ScanController" customModule="IF26_Card_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Yts-Hi-CcP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="az8-pZ-S4g"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zDx-av-lon" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3364" y="0.0"/>
         </scene>
         <!--Card-->
         <scene sceneID="4M3-b0-UrE">
@@ -235,6 +220,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JpU-yj-gjE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2127" y="779"/>
+        </scene>
+        <!--Scan Controller-->
+        <scene sceneID="p5M-D0-aaR">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HXg-HU-MU2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="EBz-LY-vRe" customClass="ScanController" customModule="IF26_Card_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RNY-0x-FoM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BfO-20-X3s">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GcD-F5-Dwp">
+                                        <rect key="frame" x="165.5" y="38" width="44" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="GcD-F5-Dwp" secondAttribute="bottom" constant="8" id="FAo-t4-bi3"/>
+                                    <constraint firstItem="GcD-F5-Dwp" firstAttribute="centerX" secondItem="BfO-20-X3s" secondAttribute="centerX" id="u8s-RU-Mej"/>
+                                    <constraint firstAttribute="height" constant="70" id="wd5-dN-DfT"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BfO-20-X3s" firstAttribute="top" secondItem="RNY-0x-FoM" secondAttribute="top" id="I2p-hH-ASU"/>
+                            <constraint firstItem="BfO-20-X3s" firstAttribute="leading" secondItem="RNY-0x-FoM" secondAttribute="leading" id="if3-PE-cAD"/>
+                            <constraint firstItem="0XH-hQ-OSR" firstAttribute="trailing" secondItem="BfO-20-X3s" secondAttribute="trailing" id="zON-Df-JHA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0XH-hQ-OSR"/>
+                    </view>
+                    <connections>
+                        <outlet property="topbar" destination="BfO-20-X3s" id="vcO-ys-yfi"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3358" y="-29"/>
         </scene>
     </scenes>
 </document>

@@ -36,6 +36,7 @@ class AddCardActivity: UITableViewController {
         
     }
     
+    
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
         return TypeList.count

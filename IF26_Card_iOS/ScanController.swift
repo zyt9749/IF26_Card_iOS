@@ -10,6 +10,10 @@ import UIKit
 import AVFoundation
 
 class ScanController: UIViewController,AVCaptureMetadataOutputObjectsDelegate{
+    
+    @IBOutlet weak var topbar: UIView!
+    
+    
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var typename:String = ""
@@ -55,6 +59,7 @@ class ScanController: UIViewController,AVCaptureMetadataOutputObjectsDelegate{
         captureSession.startRunning()
 
         // Do any additional setup after loading the view.
+        view.bringSubviewToFront(topbar)
     }
     
     
