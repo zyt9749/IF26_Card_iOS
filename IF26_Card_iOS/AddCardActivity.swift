@@ -19,6 +19,7 @@ class AddCardActivity: UITableViewController {
     "Franprix"]
     
     var mytypename:String = ""
+
     
     @IBOutlet var tableview: UITableView!
     
@@ -27,6 +28,9 @@ class AddCardActivity: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+     //   self.navigationController?.isNavigationBarHidden = true
+
         
     }
     
@@ -52,9 +56,12 @@ class AddCardActivity: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.destination is ScanController {
             let Scanview = segue.destination as! ScanController
             Scanview.typename = self.mytypename
+
         }
+
     }
 }

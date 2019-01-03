@@ -16,6 +16,7 @@ class Cardview: UIViewController,UICollectionViewDataSource, UICollectionViewDel
     
     
     @IBOutlet weak var addcard: UIBarButtonItem!
+    
     var database: Connection!
     let users_table = Table("users")
     private let ATTRIBUT_NUMBER = Expression<String>("cardnumber")
@@ -26,37 +27,34 @@ class Cardview: UIViewController,UICollectionViewDataSource, UICollectionViewDel
     
     var tableExist = false
     
+    var insertsign = false
+    var newcodest:String = ""
+    var newcodedata:Data?
+    var newtypedata:Data?
+    var newtypename:String = ""
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+      //  self.navigationItem.hidesBackButton = true
+       // self.navigationController?.isNavigationBarHidden = true
+
         let path = NSSearchPathForDirectoriesInDomains(
             .documentDirectory, .userDomainMask, true
             ).first!
         let base = try! Connection("\(path)/db.sqlite3")
+        
         self.database = base;
          print ("--> viewDidLoad fin")
         self.createTable()
-        
-        let dataC = UIImage(named: "carrefour.png")!
-        let imgDataC =  dataC.pngData()!
-        let dataD = UIImage(named: "darty.png")!
-        let imgDataD =  dataD.pngData()!
-        let dataF = UIImage(named: "fnac.png")!
-        let imgDataF =  dataF.pngData()!
-        let dataS = UIImage(named: "sephora.png")!
-        let imgDataS =  dataS.pngData()!
-
-        //let imagelist: [UIImage] =
-        self.insertData(_cardnumber: "8765790", _codephoto: imgDataC, _typephoto: imgDataC, _comment: "XXX", _typename: "Carrefour")
-        self.insertData(_cardnumber: "7890054", _codephoto: imgDataD, _typephoto: imgDataD, _comment: "AAA", _typename: "Darty")
-        self.insertData(_cardnumber: "8532246", _codephoto: imgDataF, _typephoto: imgDataF, _comment: "BBB", _typename: "Fnac")
-        self.insertData(_cardnumber: "6764339", _codephoto: imgDataS, _typephoto: imgDataS, _comment: "CCC", _typename: "Sephora")
+        self.newinsert()
         collectionview.dataSource = self
         
     }
     func createTable() {
-        if !self.tableExist {
-            self.tableExist = true;
+        if (self.tableExist == false) {
+            print(self.tableExist)
+            self.tableExist = true
             let dropTable = self.users_table.drop(ifExists: true)
             
             let createTable = self.users_table.create {
@@ -75,6 +73,20 @@ class Cardview: UIViewController,UICollectionViewDataSource, UICollectionViewDel
                 catch {
                     print (error)
                 }
+            let dataC = UIImage(named: "carrefour.png")!
+            let imgDataC =  dataC.pngData()!
+            let dataD = UIImage(named: "darty.png")!
+            let imgDataD =  dataD.pngData()!
+            let dataF = UIImage(named: "fnac.png")!
+            let imgDataF =  dataF.pngData()!
+            let dataS = UIImage(named: "sephora.png")!
+            let imgDataS =  dataS.pngData()!
+            
+            //let imagelist: [UIImage] =
+            self.insertData(_cardnumber: "8765790", _codephoto: imgDataC, _typephoto: imgDataC, _comment: "XXX", _typename: "Carrefour")
+            self.insertData(_cardnumber: "7890054", _codephoto: imgDataD, _typephoto: imgDataD, _comment: "AAA", _typename: "Darty")
+            self.insertData(_cardnumber: "8532246", _codephoto: imgDataF, _typephoto: imgDataF, _comment: "BBB", _typename: "Fnac")
+            self.insertData(_cardnumber: "6764339", _codephoto: imgDataS, _typephoto: imgDataS, _comment: "CCC", _typename: "Sephora")
             }
     }
     
@@ -86,6 +98,13 @@ class Cardview: UIViewController,UICollectionViewDataSource, UICollectionViewDel
             try self.database.run(insert)
         } catch {
             print(error)
+        }
+    }
+    //insert data if our scan activity is finished
+    func newinsert(){
+        if (self.insertsign == true) {
+            self.insertData(_cardnumber: self.newcodest, _codephoto: self.newcodedata!, _typephoto: self.newtypedata!, _comment: "XXX", _typename: self.newtypename)
+            self.insertsign = false
         }
     }
     
@@ -100,7 +119,18 @@ class Cardview: UIViewController,UICollectionViewDataSource, UICollectionViewDel
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        var imagedatalist: [Data] = []
+        
+        do{
+            let users = try self.database.prepare(self.users_table)
+            for user in users {
+                imagedatalist.append(user[ATTRIBUT_TYPEPHOTO])
+            }
+        }
+        catch {
+            print(error)
+        }
+        return imagedatalist.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -125,10 +155,37 @@ class Cardview: UIViewController,UICollectionViewDataSource, UICollectionViewDel
       return cell
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is AddCardActivity{
-            //let AddCard = segue.destination as! AddCardActivity
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        self.collectionview!.deselectItem(at: indexPath, animated:  true )
+        
+        do {
+            let users = try self.database.prepare(self.users_table)
+            var typedatalist: [Data] = []
+            var codedatalist: [Data] = []
+            var commentlist:[String] = []
+            var codelist:[String] = []
+            for user in users {
+                typedatalist.append(user[ATTRIBUT_TYPEPHOTO])
+                codedatalist.append(user[ATTRIBUT_CODEPHOTO])
+                commentlist.append(user[ATTRIBUT_COMMENT])
+                codelist.append(user[ATTRIBUT_NUMBER])
+            }
+            self.newcodest = codelist[indexPath.row]
+            self.newcodedata = codedatalist[indexPath.row]
+            self.newtypedata = codedatalist[indexPath.row]
             
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         if segue.destination is Card {
+            let card = segue.destination as! Card
+            card.codenumber = self.newcodest
+            card.codept = self.newcodedata
+            card.typept = self.newtypedata
         }
         
     }
