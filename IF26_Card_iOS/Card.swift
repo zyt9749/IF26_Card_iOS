@@ -27,9 +27,19 @@ class Card: UIViewController {
     var codenumber:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.typeimageview.image = UIImage(data: self.typept!)
         self.codeimageview.image = UIImage(data: self.codept!)
+        self.typeimageview.image = UIImage(data: self.typept!)
+       
         self.codenum.text! = self.codenumber
 
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is Cardview {
+            let cardv = segue.destination as! Cardview
+            cardv.tableExist = true
+            
+        }
+        
     }
 }

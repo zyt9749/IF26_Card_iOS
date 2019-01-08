@@ -32,6 +32,10 @@ class Cardview: UIViewController,UICollectionViewDataSource, UICollectionViewDel
     var newcodedata:Data?
     var newtypedata:Data?
     var newtypename:String = ""
+    
+    var codestr:String = ""
+    var codepht:Data?
+    var typepht:Data?
 
     
     override func viewDidLoad() {
@@ -75,18 +79,26 @@ class Cardview: UIViewController,UICollectionViewDataSource, UICollectionViewDel
                 }
             let dataC = UIImage(named: "carrefour.png")!
             let imgDataC =  dataC.pngData()!
+            let codephotoC = self.creatBarCode(content: "3301237832922")
+            
             let dataD = UIImage(named: "darty.png")!
             let imgDataD =  dataD.pngData()!
+            let codephotoD = self.creatBarCode(content: "3301983682907")
+
+
             let dataF = UIImage(named: "fnac.png")!
             let imgDataF =  dataF.pngData()!
+            let codephotoF = self.creatBarCode(content: "3301458156842")
+
             let dataS = UIImage(named: "sephora.png")!
             let imgDataS =  dataS.pngData()!
-            
+            let codephotoS = self.creatBarCode(content: "3301951128424")
+
             //let imagelist: [UIImage] =
-            self.insertData(_cardnumber: "8765790", _codephoto: imgDataC, _typephoto: imgDataC, _comment: "XXX", _typename: "Carrefour")
-            self.insertData(_cardnumber: "7890054", _codephoto: imgDataD, _typephoto: imgDataD, _comment: "AAA", _typename: "Darty")
-            self.insertData(_cardnumber: "8532246", _codephoto: imgDataF, _typephoto: imgDataF, _comment: "BBB", _typename: "Fnac")
-            self.insertData(_cardnumber: "6764339", _codephoto: imgDataS, _typephoto: imgDataS, _comment: "CCC", _typename: "Sephora")
+            self.insertData(_cardnumber: "3301237832922", _codephoto: (codephotoC!.pngData())!, _typephoto: imgDataC, _comment: "XXX", _typename: "Carrefour")
+            self.insertData(_cardnumber: "3301983682907", _codephoto: (codephotoD!.pngData())!, _typephoto: imgDataD, _comment: "AAA", _typename: "Darty")
+            self.insertData(_cardnumber: "3301458156842", _codephoto: (codephotoF!.pngData())!, _typephoto: imgDataF, _comment: "BBB", _typename: "Fnac")
+            self.insertData(_cardnumber: "3301951128424", _codephoto: (codephotoS!.pngData())!, _typephoto: imgDataS, _comment: "CCC", _typename: "Sephora")
             }
     }
     
@@ -148,6 +160,7 @@ class Cardview: UIViewController,UICollectionViewDataSource, UICollectionViewDel
             }
             let imgview = cell.viewWithTag(1) as! UIImageView
             imgview.image = imagelist[indexPath.row]
+            cell.tag = indexPath.row
         }
         catch {
             print("--> selectUSers est en erreur")
@@ -155,8 +168,8 @@ class Cardview: UIViewController,UICollectionViewDataSource, UICollectionViewDel
       return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        self.collectionview!.deselectItem(at: indexPath, animated:  true )
+  /*  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexpath: IndexPath) {
+       /* self.collectionview!.deselectItem(at: indexPath, animated:  true )*/
         
         do {
             let users = try self.database.prepare(self.users_table)
@@ -170,26 +183,82 @@ class Cardview: UIViewController,UICollectionViewDataSource, UICollectionViewDel
                 commentlist.append(user[ATTRIBUT_COMMENT])
                 codelist.append(user[ATTRIBUT_NUMBER])
             }
-            self.newcodest = codelist[indexPath.row]
-            self.newcodedata = codedatalist[indexPath.row]
-            self.newtypedata = codedatalist[indexPath.row]
+            self.codestr = codelist[indexpath.row]
+            self.codepht = codedatalist[indexpath.row]
+            self.typepht = typedatalist[indexpath.row]
             
         }
         catch {
             print(error)
         }
-    }
+    }*/
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          if segue.destination is Card {
-            let card = segue.destination as! Card
-            card.codenumber = self.newcodest
-            card.codept = self.newcodedata
-            card.typept = self.newtypedata
+            if let collecionviewcell:CollectionViewCell = sender as? CollectionViewCell {
+                
+                    do {
+                        let users = try self.database.prepare(self.users_table)
+                        var typedatalist: [Data] = []
+                        var codedatalist: [Data] = []
+                        var commentlist:[String] = []
+                        var codelist:[String] = []
+                        for user in users {
+                            typedatalist.append(user[ATTRIBUT_TYPEPHOTO])
+                            codedatalist.append(user[ATTRIBUT_CODEPHOTO])
+                            commentlist.append(user[ATTRIBUT_COMMENT])
+                            codelist.append(user[ATTRIBUT_NUMBER])
+                        }
+                       /* self.codestr =codelist[indexpath.row]
+                        self.codepht = codedatalist[indexpath.row]
+                        self.typepht = typedatalist[indexpath.row]*/
+                        let card = segue.destination as! Card
+                        card.codenumber = codelist[collecionviewcell.tag]
+                        card.codept = codedatalist[collecionviewcell.tag]
+                        card.typept = typedatalist[collecionviewcell.tag]
+                    }
+                    catch {
+                        print(error)
+                    }
+                
+            
+            
+                }
+            
         }
+    }
+    func creatBarCode(content: String?) -> UIImage? {
+        
+        
+        // format of the bar code
+        let data = content?.data(using: String.Encoding.ascii, allowLossyConversion: false)
+        let filter = CIFilter(name: "CICode128BarcodeGenerator")
+        filter?.setValue(data, forKey: "inputMessage")
+        filter?.setValue(NSNumber(value: 0), forKey: "inputQuietSpace")
+        let outputImage = filter?.outputImage
+        // let the image of the bar code be in color black and white
+        let colorFilter = CIFilter(name: "CIFalseColor")!
+        colorFilter.setDefaults()
+        colorFilter.setValue(outputImage, forKey: "inputImage")
+        colorFilter.setValue(CIColor(red: 0, green: 0, blue: 0), forKey: "inputColor0")
+        colorFilter.setValue(CIColor(red: 1, green: 1, blue: 1, alpha: 0), forKey: "inputColor1")
+        // return the bar code
+        let codeImage = UIImage(ciImage: (colorFilter.outputImage!.transformed(by: CGAffineTransform(scaleX: 10, y: 10))))
+        return self.resizemyImage(image: codeImage, newWidth: 300, newHeight: 100)
         
     }
     
+    func resizemyImage(image: UIImage, newWidth: CGFloat, newHeight: CGFloat) -> UIImage {
+        
+        //     let scale = newWidth / image.size.width
+        //     let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth,height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
     
     
 }

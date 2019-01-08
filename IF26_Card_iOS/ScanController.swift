@@ -152,19 +152,19 @@ class ScanController: UIViewController,AVCaptureMetadataOutputObjectsDelegate{
      func creat_barCode(content: String?) -> UIImage? {
         
 
-            // 注意生成条形码的编码方式
+            // format of the bar code
             let data = content?.data(using: String.Encoding.ascii, allowLossyConversion: false)
             let filter = CIFilter(name: "CICode128BarcodeGenerator")
             filter?.setValue(data, forKey: "inputMessage")
             filter?.setValue(NSNumber(value: 0), forKey: "inputQuietSpace")
             let outputImage = filter?.outputImage
-            // 创建一个颜色滤镜,黑白色
+            // let the image of the bar code be in color black and white
             let colorFilter = CIFilter(name: "CIFalseColor")!
             colorFilter.setDefaults()
             colorFilter.setValue(outputImage, forKey: "inputImage")
             colorFilter.setValue(CIColor(red: 0, green: 0, blue: 0), forKey: "inputColor0")
             colorFilter.setValue(CIColor(red: 1, green: 1, blue: 1, alpha: 0), forKey: "inputColor1")
-            // 返回条形码image
+            // return the bar code
             let codeImage = UIImage(ciImage: (colorFilter.outputImage!.transformed(by: CGAffineTransform(scaleX: 10, y: 10))))
             return self.resizeImage(image: codeImage, newWidth: 300, newHeight: 100)
         

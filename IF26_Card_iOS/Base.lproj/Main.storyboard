@@ -25,7 +25,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NJX-sH-oMC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="481" y="902"/>
+            <point key="canvasLocation" x="-154" y="1098"/>
         </scene>
         <!--Card-->
         <scene sceneID="dY8-i5-yt8">
@@ -61,7 +61,7 @@
                                         </view>
                                         <connections>
                                             <outlet property="imageview" destination="KjU-g6-lYF" id="Edy-75-bVc"/>
-                                            <segue destination="LsM-YC-IlO" kind="show" id="3OR-34-dnp"/>
+                                            <segue destination="LsM-YC-IlO" kind="show" id="WMQ-wk-yRE"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -83,7 +83,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="8J4-gj-3Zi"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Card" id="ZM8-zu-Aaz" userLabel="Card"/>
+                    <tabBarItem key="tabBarItem" title="Card" id="VNR-Li-W5g" userLabel="Card"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addcard" destination="6Q3-IB-QLv" id="Mto-nD-vp1"/>
                         <outlet property="collectionview" destination="cj9-Ss-vfm" id="RxY-jR-ZsN"/>
@@ -91,12 +93,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lfi-he-8hZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1446" y="0.0"/>
+            <point key="canvasLocation" x="1660" y="298"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ssp-HY-J2j">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tg7-a3-clR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="3mg-dm-lWS" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="JtG-ZN-bEr"/>
@@ -111,8 +112,9 @@
                         <segue destination="ns1-Ce-G7u" kind="relationship" relationship="viewControllers" id="rAF-Mi-OSF"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tg7-a3-clR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="481" y="0.0"/>
+            <point key="canvasLocation" x="247" y="275"/>
         </scene>
         <!--Setting-->
         <scene sceneID="8II-yN-RRf">
@@ -129,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRx-cT-HEO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1284" y="902"/>
+            <point key="canvasLocation" x="609" y="1098"/>
         </scene>
         <!--Add Card Activity-->
         <scene sceneID="tnj-Dy-KDH">
@@ -174,7 +176,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PEh-N6-RCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2383" y="0.0"/>
+            <point key="canvasLocation" x="2588" y="297"/>
         </scene>
         <!--Card-->
         <scene sceneID="4M3-b0-UrE">
@@ -250,12 +252,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JpU-yj-gjE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2125.5999999999999" y="778.56071964017997"/>
+            <point key="canvasLocation" x="1660" y="1163"/>
         </scene>
         <!--Scan Controller-->
         <scene sceneID="p5M-D0-aaR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HXg-HU-MU2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="EBz-LY-vRe" customClass="ScanController" customModule="IF26_Card_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RNY-0x-FoM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -292,11 +293,13 @@
                         <segue destination="kPh-2o-5ZU" kind="show" identifier="scanreturn" id="KSs-RM-ohG"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HXg-HU-MU2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3281" y="0.0"/>
+            <point key="canvasLocation" x="3657" y="297"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="WMQ-wk-yRE"/>
         <segue reference="uzY-ZX-IW9"/>
     </inferredMetricsTieBreakers>
 </document>
